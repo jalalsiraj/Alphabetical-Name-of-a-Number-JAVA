@@ -1,23 +1,209 @@
-# Compiled class file
-*.class
+import java.util.*;
+public class Main {
 
-# Log file
-*.log
+	public static void main(String[] args) {
+		
+		Scanner scan= new Scanner(System.in);
+		System.out.println("Type a Number Between 9999:");
+		int n= scan.nextInt();
+		String s= Integer.toString(n);
+		String th="Thousand ";
+		String hu="Hundred ";
+		String s1="";
+		
+		String[] one= new String[] {"One ","Two ","Three ","Four ","Five ","Six ","Seven ","Eight ","Nine ","Ten ","Eleven ","Twelve ","Thirteen ","Fourteen ","Fifteen ","Sixteen ","Seventeen ","Eighteen ","Nineteen "};
+		String[] tens= new String[] {"ten ","twenty ","thirty ","Fourty ","Fifty ","Sixty ","Seventy ","Eighty ","Ninety "};
+		
+		
+//		Ones Starting
+		
+		
+			if(s.length()==1) {
+				int i= Character.getNumericValue(s.charAt(0));
+				if(i==0) {
+					System.out.println("Zero");
+				}
+				else {
+				System.out.println(one[i-1]);
+				}
+		}
+			
+			
+//			Tens Starting
+			
+			try {
+			
+			if(s.length()==2) {
+				if(s=="00") {
+					System.out.println("Zero");
+				}
+				int i= Integer.parseInt(s);
+				if(i>10 && i<20) {
+					System.out.println(one[i-1]);
+				}
+				int t= Character.getNumericValue(s.charAt(0));
+				int v= Character.getNumericValue(s.charAt(1));
+				
+				if(v==0) {
+					System.out.println(tens[t-1]);
+				}
+				
+				if(t>1) {
+				s1=s1+tens[t-1]+one[v-1];
+				System.out.println(s1);
+				}
+				
+			}
+			}
+			catch(Exception e) {
+				System.out.println();
+			}
+			
+			
+//			Hundreds Starting
+	
+			if(s.length()==3) {
+				if(s=="000") {
+					System.out.println("Zero");
+				}
+				int i= Character.getNumericValue(s.charAt(0));
+				int t= Character.getNumericValue(s.charAt(1));
+				int v= Character.getNumericValue(s.charAt(2));
+				
+				if(i>0 && t==0 && v==0) {
+					if(i==1) {
+						System.out.println(hu);
+					}
+					else {
+						s1=s1+one[i-1]+hu;
+						System.out.println(s1);
+					}
+				}
+				
+				if(i>0 && t==0 && v>0) {
+					if(i==1) {
+						System.out.println(hu+one[v-1]);
+					}
+					else {
+						s1=s1+one[i-1]+hu+one[v-1];
+						System.out.println(s1);
+					}
+				}
+				if(i>0 && t>0 && v>0) {
+					
+					String j= s.substring(1,3);
+					int o= Integer.parseInt(j);
+					
+					if(i==1) { 
+						if(o>10 && o<20) {
+							s1=s1+hu+one[o-1];
+							System.out.println(s1);
+						}
+						else {
+						s1=s1+hu+tens[t-1]+one[v-1];
+						System.out.println(s1);
+						}
+					}
+					
+					else {
+						if(o>10 && o<20) {
+							s1=s1+one[i-1]+hu+one[o-1];
+							System.out.println(s1);
+						}
+						
+						else {
+						s1=s1+one[i-1]+hu+tens[t-1]+one[v-1];
+						System.out.println(s1);
+						}
+					}
+				}
+				if(i>0 && t>0 && v==0) {
+					
+					if(i==1 && t==1) {
+						System.out.println(hu+one[9]);
+					}
+					else {
+						
+						s1=s1+one[i-1]+hu+tens[t-1];
+						System.out.println(s1);
+					}
+				}
+				if(i==0 && t>0 && v>0) {
+					String temp= s.substring(1,2);
+					int l= Integer.parseInt(temp);
+					
+					System.out.println(one[l]);
+				}
+				
+			}
+			
+			
+			
+//			thousands Starting
+			
+			if(s.length()==4) {
+				if(s=="0000") {
+					System.out.println("Zero");
+				}
+				int i= Character.getNumericValue(s.charAt(0));
+				int t= Character.getNumericValue(s.charAt(1));
+				int v= Character.getNumericValue(s.charAt(2));
+				int u= Character.getNumericValue(s.charAt(3));
+				
+				
+				String temp= s.substring(2,4);
+				int j= Integer.parseInt(temp);
+				
+				if(i>0 && t==0 && v==0 && u==0) {
+					if(i==1) {
+						System.out.println(th);
+					}
+					else {
+						s1=s1+one[i-1]+th;
+						System.out.println(s1);
+					}
+				}
+				if(i>0 && t>0 && v==0 && u==0) {
+					if(i==1) {
+						s1=s1+th+one[t-1]+hu;
+						System.out.println(s1);
+					}
+					else {
+					s1=s1+one[i-1]+th+one[t-1]+hu;
+					System.out.println(s1);
+					}
+				}
+				
+				if(i>0 && t>0 && v>0 && u==0) {
+					s1=s1+one[i-1]+th+one[t-1]+hu+tens[v-1];
+					System.out.println(s1);
+				}
+				if(i>0 && t>0 && v>0 && u>0) {
+					if(j>10 && j<20) {
+						s1=s1+one[i-1]+th+one[t-1]+hu+one[j-1];
+						System.out.println(s1);
+					}
+					else {
+					s1=s1+one[i-1]+th+one[t-1]+hu+tens[v-1]+one[u-1];
+					System.out.println(s1);
+					}
+				}
+				if(i==0 && t==0 && v>0 && u>0) {
+					if(j>10 && j<20) {
+						s1=s1+one[j-1];
+						System.out.println(s1);
+					}
+					else {
+						s1=s1+tens[v-1]+one[u-1];
+						System.out.println(s1);
+					}
+				}
+				if(i==0 && t==0 && v==0 && u>0) {
+					s1=s1+one[u-1];
+					System.out.println(s1);
+				}
+			}
+			
+	}
+}
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
